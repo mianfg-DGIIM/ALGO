@@ -1,0 +1,47 @@
+RECIBIDO: 401@usuario@usuario
+RESPUESTA: 101@Acceso correcto
+RECIBIDO: 502@usuario
+RESPUESTA: 202
+RECIBIDO: 401@usuario@usuario
+RESPUESTA: 101@Acceso correcto
+RECIBIDO: 502@usuario
+RESPUESTA: 202
+RECIBIDO: 401@mianfg@holasoymianfg
+RESPUESTA: 101@Acceso correcto
+RECIBIDO: 502@mianfg
+RESPUESTA: 202@2
+RECIBIDO: 501@2
+RESPUESTA: 201@2@Granada@Albacete@2020-01-01@4@mianfg
+RECIBIDO: 601@Granada@Almería@2019-11-27@2@mianfg
+RESPUESTA: 101@Fecha insertada correctamente
+RECIBIDO: 502@mianfg
+RESPUESTA: 202@2@4
+RECIBIDO: 501@2
+RESPUESTA: 201@2@Granada@Albacete@2020-01-01@4@mianfg
+RECIBIDO: 501@4
+RESPUESTA: 201@4@Granada@Almería@2019-11-27@2@mianfg
+RECIBIDO: 501@2
+RESPUESTA: 201@2@Granada@Albacete@2020-01-01@4@mianfg
+RECIBIDO: 701@2
+RESPUESTA: 101@Viaje borrado correctamente.
+
+RECIBIDO: 502@mianfg
+RESPUESTA: 202@4
+RECIBIDO: 501@4
+RESPUESTA: 201@4@Granada@Almería@2019-11-27@2@mianfg
+RECIBIDO: 503@mianfg
+RESPUESTA: 202
+RECIBIDO: 504@Granada@Albacete
+RESPUESTA: 202@3
+RECIBIDO: 501@3
+RESPUESTA: 201@3@Granada@Albacete@2019-12-19@3@pedrogallegolpz@alexia
+RECIBIDO: 602@3@mianfg
+RESPUESTA: 101@Usuario mianfg añadido correctamente al viaje 3
+RECIBIDO: 503@mianfg
+RESPUESTA: 202@3
+RECIBIDO: 501@3
+RESPUESTA: 201@3@Granada@Albacete@2019-12-19@3@pedrogallegolpz@alexia@mianfg
+RECIBIDO: 503@mianfg
+RESPUESTA: 202@3
+RECIBIDO: 501@3
+RESPUESTA: 201@3@Granada@Albacete@2019-12-19@3@pedrogallegolpz@alexia@mianfg

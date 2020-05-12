@@ -1,0 +1,797 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Plantilla para libro de texto de matemáticas.
+%
+% Esta plantilla ha sido desarrollada desde cero, pero utiliza algunas partes
+% del código de la plantilla original utilizada en apuntesDGIIM
+% (https://github.com/libreim/apuntesDGIIM), basada a su vez en las plantillas
+% 'Short Sectioned Assignment' de Frits Wenneker (http://www.howtotex.com),
+% 'Plantilla de Trabajo' de Mario Román y 'Plantilla básica de Latex en Español'
+% de Andrés Herrera Poyatos (https://github.com/andreshp). También recoge
+% ideas de la plantilla 'Multi-Purpose Large Font Title Page' de
+% Frits Wenneker y Vel (vel@latextemplates.com).
+%
+% Licencia:	
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN BÁSICA DEL DOCUMENTO
+% ---------------------------------------------------------------------------
+
+%\documentclass[11pt, a4paper, twoside]{article} % Usar para imprimir
+\documentclass[10pt, a4paper]{article}
+
+\linespread{1.3}            % Espaciado entre líneas.
+\setlength\parindent{0pt}   % No indentar el texto por defecto.
+\setlength\parskip{7pt}
+
+% ---------------------------------------------------------------------------
+% PAQUETES BÁSICOS
+% ---------------------------------------------------------------------------
+
+% IDIOMA
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla, es-lcroman, es-noquoting]{babel}
+\usepackage[table,xcdraw]{xcolor}
+
+% MATEMÁTICAS
+\usepackage{amsmath}    % Paquete básico de matemáticas
+\usepackage{amsthm}     % Teoremas
+\usepackage{mathrsfs}   % Fuente para ciertas letras utilizadas en matemáticas
+
+% FUENTES
+\usepackage{newpxtext, newpxmath}   % Fuente similar a Palatino
+\usepackage{FiraSans}                 % Fuente sans serif
+\usepackage[T1]{fontenc}
+\usepackage[italic]{mathastext}     % Utiliza la fuente del documento
+                                    % en los entornos matemáticos
+
+% MÁRGENES
+\usepackage[margin=2.5cm, top=3cm]{geometry}
+
+% LISTAS
+\usepackage{enumitem}       % Mejores listas
+\setlist{leftmargin=.5in}   % Especifica la indentación para las listas.
+
+% Listas ordenadas con números romanos (i), (ii), etc.
+\newenvironment{nlist}
+{\begin{enumerate}
+    \renewcommand\labelenumi{(\emph{\roman{enumi})}}}
+  {\end{enumerate}}
+
+%  OTROS
+\usepackage[hidelinks]{hyperref}   % Enlaces
+\usepackage{graphicx}   % Permite incluir gráficos en el documento
+\usepackage{relsize}
+
+% LISTINGS
+\usepackage{listings}
+\usepackage{xcolor}     % Permite definir y utilizar colores
+\usepackage{lipsum}
+\usepackage{courier}
+
+% Fijar tabla a posición
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+% Colores para los bloques de código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+%\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+%\lstset{framextopmargin=50pt,frame=bottomline}
+ 
+% ---------------------------------------------------------------------------
+% COMANDOS PERSONALIZADOS
+% ---------------------------------------------------------------------------
+
+% \equalto
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+
+
+% ---------------------------------------------------------------------------
+% COLORES
+% ---------------------------------------------------------------------------
+
+\definecolor{50}{HTML}{E0F2F1}
+\definecolor{100}{HTML}{B2DFDB}
+\definecolor{200}{HTML}{80CBC4}
+\definecolor{300}{HTML}{4DB6AC}
+\definecolor{400}{HTML}{26A69A}
+\definecolor{500}{HTML}{009688}
+\definecolor{600}{HTML}{00897B}
+\definecolor{700}{HTML}{00796B}
+\definecolor{800}{HTML}{00695C}
+\definecolor{900}{HTML}{004D40}
+
+% ---------------------------------------------------------------------------
+% DISEÑO DE PÁGINA
+% ---------------------------------------------------------------------------
+
+\usepackage{pagecolor}
+\usepackage{afterpage}
+
+% ---------------------------------------------------------------------------
+% CABECERA Y PIE DE PÁGINA
+% ---------------------------------------------------------------------------
+
+\usepackage{fancyhdr}   % Paquete para cabeceras y pies de página
+
+% Indica que las páginas usarán la configuración de fancyhdr
+\pagestyle{fancy}
+\fancyhf{}
+
+% Representa la sección de la cabecera
+\renewcommand{\sectionmark}[1]{%
+\markboth{#1}{}}
+
+% Representa la subsección de la cabecera
+\renewcommand{\subsectionmark}[1]{%
+\markright{#1}{}}
+
+% Parte derecha de la cabecera
+\fancyhead[LE,RO]{\sffamily\textsl{\rightmark} \hspace{1em}  \textcolor{500}{\rule[-0.4ex]{0.2ex}{1.2em}} \hspace{1em} \thepage}
+
+% Parte izquierda de la cabecera
+\fancyhead[RE,LO]{\sffamily{\leftmark}}
+
+% Elimina la línea de la cabecera
+\renewcommand{\headrulewidth}{0pt}
+
+% Controla la altura de la cabecera para que no haya errores
+\setlength{\headheight}{14pt}
+
+% ---------------------------------------------------------------------------
+% TÍTULOS DE PARTES Y SECCIONES
+% ---------------------------------------------------------------------------
+
+\usepackage{titlesec}
+
+% Estilo de los títulos de las partes
+\titleformat{\part}[hang]{\Huge\bfseries\sffamily}{\thepart\hspace{20pt}\textcolor{500}{|}\hspace{20pt}}{0pt}{\Huge\bfseries}
+\titlespacing*{\part}{0cm}{-2em}{2em}[0pt]
+
+% Reiniciamos el contador de secciones entre partes (opcional)
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+% Estilo de los títulos de las secciones, subsecciones y subsubsecciones
+\titleformat{\section}
+  {\Large\bfseries\sffamily}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\Large\sffamily}{\thesubsection}{1em}{}[\vspace{.5em}]
+
+\titleformat{\subsubsection}
+  {\sffamily}{\thesubsubsection}{1em}{}
+
+% ---------------------------------------------------------------------------
+% ENTORNOS PERSONALIZADOS
+% ---------------------------------------------------------------------------
+
+\usepackage{mdframed}
+
+%% DEFINICIONES DE LOS ESTILOS
+
+% Nuevo estilo para definiciones
+\newtheoremstyle{definition-style}  % Nombre del estilo
+{}                                  % Espacio por encima
+{}                                  % Espacio por debajo
+{}                                  % Fuente del cuerpo
+{}                                  % Identación
+{\bf\sffamily}                      % Fuente para la cabecera
+{.}                                 % Puntuación tras la cabecera
+{.5em}                              % Espacio tras la cabecera
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}  % Especificación de la cabecera
+
+% Nuevo estilo para notas
+\newtheoremstyle{remark-style}
+{10pt}
+{10pt}
+{}
+{}
+{\itshape \sffamily}
+{.}
+{.5em}
+{}
+
+% Nuevo estilo para teoremas y proposiciones
+\newtheoremstyle{theorem-style}
+{}
+{}
+{}
+{}
+{\bfseries \sffamily}
+{.}
+{.5em}
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+% Nuevo estilo para ejemplos
+\newtheoremstyle{example-style}
+{10pt}
+{10pt}
+{}
+{}
+{\bf \sffamily}
+{}
+{.5em}
+{\thmname{#1}\thmnumber{ #2.}\thmnote{ #3.}}
+
+% Nuevo estilo para la demostración
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\itshape\sffamily#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+%% ASIGNACIÓN DE LOS ESTILOS
+
+% Teoremas, proposiciones y corolarios
+\newtheoremstyle{theorem-style}{}{}{}{}{}{}{ }{}
+\theoremstyle{theorem-style}
+\newtheorem*{datos}{}
+\theoremstyle{theorem-style}
+\newtheorem{nth}{Teorema}[section]
+\newtheorem{nprop}{Proposición}[section]
+\newtheorem{ncor}{Corolario}[section]
+\newtheorem{lema}{Lema}[section]
+
+% Definiciones
+\theoremstyle{definition-style}
+\newtheorem{ndef}{Definición}[section]
+
+% Notas
+\theoremstyle{remark-style}
+\newtheorem*{nota}{Nota}
+
+% Ejemplos
+\theoremstyle{example-style}
+\newtheorem{ejemplo}{Ejemplo}[section]
+
+% Ejercicios y solución
+\theoremstyle{definition-style}
+\newtheorem{ejer}{Ejercicio}[section]
+
+\theoremstyle{remark-style}
+\newtheorem*{sol}{Solución}
+
+%% MARCOS DE LOS ESTILOS
+
+% Configuración general de mdframe, los estilos de los teoremas, etc
+\mdfsetup{
+  skipabove=1em,
+  skipbelow=1em,
+  innertopmargin=1em,
+  innerbottommargin=1em,
+  splittopskip=2\topsep,
+}
+
+% Definimos los marcos de los estilos
+
+
+\mdfdefinestyle{datos-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0em, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0em, %
+}%
+\mdfdefinestyle{nth-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0em, %
+	innerleftmargin=1em, %
+  innerrightmargin=1em,
+	rightmargin=0em, %
+}%
+
+\mdfdefinestyle{nprop-frame}{
+	linewidth=2pt, %
+	linecolor= 300, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ndef-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	backgroundcolor= 50,
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ejer-frame}{
+	linewidth=2pt, %
+	linecolor= 300, %
+	backgroundcolor= 50,
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ejemplo-frame}{
+	linewidth=0pt, %
+	linecolor= 300, %
+	leftline=false, %
+	rightline=false, %
+	leftmargin=0pt, %
+	innerleftmargin=1.3em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+	innertopmargin=0em,%
+	innerbottommargin=0em, %
+	splittopskip=\topskip, %
+}%
+
+% Asignamos los marcos a los estilos
+\surroundwithmdframed[style=nth-frame]{nth}
+\surroundwithmdframed[style=datos-frame]{datos}
+\surroundwithmdframed[style=nprop-frame]{nprop}
+\surroundwithmdframed[style=nprop-frame]{ncor}
+\surroundwithmdframed[style=ndef-frame]{ndef}
+\surroundwithmdframed[style=ejer-frame]{ejer}
+\surroundwithmdframed[style=ejemplo-frame]{ejemplo}
+\surroundwithmdframed[style=ejemplo-frame]{sol}
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN DE LA PORTADA
+% ---------------------------------------------------------------------------
+
+\newcommand{\asignatura}{Análisis de eficiencia de algoritmos}
+
+\newcommand{\autor}{Celia Arias Martínez\\Miguel Ángel Fernández Gutiérrez\\Sergio Quijano Rey\\Lucía Salamanca López\\\hspace{1cm}}
+
+\newcommand{\grado}{segfault}
+
+\newcommand{\universidad}{Universidad de Granada}
+
+\newcommand{\enlaceweb}{github.com/DGIIMUnderground}
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN PERSONALIZADA
+% ---------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---------------------------------------------------------------------------
+% COMIENZO DEL DOCUMENTO
+% ---------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% PORTADA EXTERIOR
+% ---------------------------------------------------------------------------
+
+\newpagecolor{500}\afterpage{\restorepagecolor} % Color de la página
+\begin{titlepage}
+
+  % Título del documento
+	\parbox[t]{\textwidth}{
+			\raggedright % Texto alineado a la izquierda
+			\fontsize{40pt}{40pt}\selectfont\sffamily\color{white}{
+				\textbf{\Huge{Práctica 3}}\\\textbf{Greedy}\\\huge{Algorítmica}
+      }
+	}
+
+	\vfill
+
+	%% Autor e información del documento
+	\parbox[t]{\textwidth}{
+		\raggedright % Texto alineado a la izquierda
+		\sffamily\large\color{white}
+		\grado\\
+		{\Large \autor }\\[15pt]
+		\includegraphics[width=130pt]{ugrlogo.pdf}
+	}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% PÁGINA DE LICENCIA
+% ---------------------------------------------------------------------------
+
+\thispagestyle{empty}
+\null
+\vfill
+
+%% Información sobre la licencia
+\parbox[t]{\textwidth}{
+  \includegraphics{by-nc-sa.pdf}\\[4pt]
+  \raggedright % Texto alineado a la izquierda
+  \sffamily\large
+  {\Large Este trabajo se distribuye bajo una licencia CC BY-NC-SA 4.0.}\\[4pt]
+  Eres libre de distribuir y adaptar el material siempre que reconozcas a los\\
+  autores originales del documento, no lo utilices para fines comerciales\\
+  y lo distribuyas bajo la misma licencia.\\[4pt]
+  \texttt{creativecommons.org/licenses/by-nc-sa/4.0/}
+}
+
+% ---------------------------------------------------------------------------
+% PORTADA INTERIOR
+% ---------------------------------------------------------------------------
+
+\begin{titlepage}
+
+  % Título del documento
+  \parbox[t]{\textwidth}{
+  	\raggedright % Texto alineado a la izquierda
+  	\fontsize{40pt}{40pt}\selectfont\sffamily\color{500}{
+  		\textbf{\Huge{Práctica 3}}\\\textbf{Greedy}\\\huge{Algorítmica}
+  	}
+  }
+
+	\vfill
+	
+	%% Autor e información del documento
+	\parbox[t]{\textwidth}{
+		\raggedright % Texto alineado a la izquierda
+		\sffamily\large
+		\grado\\
+		{\Large \autor }\\[15pt]
+		\includegraphics[width=130pt]{ugrlogo-dark.pdf}
+	}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% ÍNDICE
+% ---------------------------------------------------------------------------
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------------
+% CONTENIDO
+% ---------------------------------------------------------------------------
+
+\part{Introducción}
+
+Esta \textbf{práctica 2}, de divide y vencerás, consiste en dos partes principales:
+
+\begin{itemize}
+	\item \textbf{Problema común:} traspuesta de una matriz de orden $2^k$.
+	\item \textbf{Problema asignado:} mezcla de $k$ vectores ordenados.
+\end{itemize}
+
+\subsection*{Objetivo de esta práctica}
+
+En esta práctica, pretenderemos aproximar la resolución de problemas mediante la técnica \textbf{divide y vencerás}, consistente en la división del problema en subproblemas, y en la resolución de éstos para poder resolver el problema último.
+
+Mediante la aplicación de esta técnica en la resolución de dos problemas diferentes, apreciaremos la utilidad de esta técnica para resolver problemas de forma más eficiente que otras iniciativas sencillas o directas.
+
+Por otra parte, también veremos que esta técnica puede no ser la más favorable en algunas ocasiones, es decir, que las versiones más sencillas pueden tener una mejor complejidad y ser más apropiadas.
+
+\pagebreak
+\part{Desarrollo}
+
+A continuación, estudiaremos los dos algoritmos propuestos.
+
+\section{Problema del viajante de comercio}
+
+\begin{datos}
+	{\sffamily Dado un conjunto de ciudades y una matriz con las distancias entre ellas, buscar el recorrido mínimo que que pase por todas ellas una  vez y vuelva al punto de partida.}
+\end{datos}
+
+\subsection{Enfoque por cercanía}
+
+El enfoque por cercanía es un algoritmo Greedy cuyo funcionamiento es: dado un nodo cualquiera, encontrar el nodo más cercano a él y añadirlo al recorrido, hasta recorrer todos los nodos.  \\
+
+
+\begin{lstlisting}[language=C]
+vector<common::Point> get_best_solution(vector<common::Point> points){
+	vector<common::Point> road;                 // Solucion que vamos a construir
+	vector<common::Point> points_left = points; // Puntos que quedan por insertar a la solucion
+	// Parto siempre del primer punto del vector
+	road.push_back(points_left[0]);
+	points_left.erase(points_left.begin() + 0);
+	// Voy construyendo la solucion, sacando puntos de points_left y colocandolos en road
+	while(points_left.size() > 0){
+		double min_distance = common::distance(road[road.size() -1], points_left[0]);
+		int min_pos = 0;
+		// Buscamos el punto mas cercano
+		for(int i = 0; i < points_left.size(); i++){
+			double current_distance = common::distance(road[road.size() -1], points_left[i]);
+			if(current_distance < min_distance){
+				min_distance = current_distance;
+				min_pos = i;
+		}
+	}
+	// Insertamos el punto mas cercano a la solucion y lo quitamos de los puntos que faltan
+	road.push_back(points_left[min_pos]);
+	points_left.erase(points_left.begin() + min_pos);
+	}
+	return road;
+}
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{common::Point}} es un struct definido en \emph{tsp\_common.hpp} que tiene una coordenada y, una x y una función distancia. 
+	\item \textbf{\texttt{road}} vector donde almacenamos las soluciones parciales, es decir, las que resultan de añadir un nodo al recorrido.
+	\item \textbf{\texttt{points\_left}} vector donde almacenamos los nodos que nos quedan por recorrer.
+	 
+\end{itemize}
+
+El algoritmo funciona de esta forma: \\
+Guardamos en \emph{points\_left} todos los nodos y en \emph{road} el primer punto, que podemos asumir que es el primero. 
+Mientras que el vector \emph{points\_left} no esté vacío calculamos la distancia de todos esos nodos al último Punto de \emph{road} y añadimos el nodo que esté a la menor distancia, borrándolo de \emph{points\_left}. 
+
+
+Procederemos ahora a realizar el análisis teórico y empírico de este algoritmo.
+
+
+
+\subsubsection{Análisis empírico}
+
+Los tamaños de prueba para ejecutar el algoritmo han ido desde 100 hasta 4000 ciudades, cada vez con incremento de 200. A su vez cada iteración la hemos hecho 100 veces y hemos calculado la media, con el fin de eliminar los mejores y peores casos.  
+
+Los datos obtenidos, calculando por un lado el tiempo y por otro la distancia han sido estos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.1.} {\sffamily Datos empíricos para viajante de comercio versión cercanía, tiempo.}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{./../Graficas/graficastsp/snfTiempo.png}
+	\end{center}	
+\end{datos}
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.2.} {\sffamily Datos empíricos para viajante de comercio versión cercanía, distancia.}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{./../Graficas/graficastsp/snfDistancia.png}
+	\end{center}	
+\end{datos}
+
+Los datos se encuentran en una tabla al final del documento. 
+
+\pagebreak
+
+\subsection{Enfoque por inserción}
+
+El enfoque por inserción es un algoritmo Greedy cuyo funcionamiento es: coge un recorrido dado e inserta un nodo más de forma que el recorrido sea mínimo.  
+
+\begin{lstlisting}[language=C]
+vector<common::Point> get_best_solution(vector<common::Point> points){
+	vector<common::Point> candidates = points;  // Vector con los candidatos
+	vector<common::Point> road;                 // Vector con la solucion parcial
+	
+	// Tomo los tres puntos extremos del plano y los coloco como solucion parcial inicial
+	int most_north = get_most_north(candidates);
+	int most_east = get_most_east(candidates);
+	int most_west = get_most_west(candidates);
+	
+	road.push_back(candidates[most_north]);
+	road.push_back(candidates[most_west]);
+	road.push_back(candidates[most_east]);
+	
+	candidates.erase(candidates.begin() + most_north);
+	candidates.erase(candidates.begin() + most_west);
+	candidates.erase(candidates.begin() + most_east);
+	
+	// Construyo las soluciones parciales
+	while(candidates.size() > 0){
+		// Tomo el mejor candidato para la siguiente iteracion
+		vector<int> best_candidate_and_pos = get_best_candidate(road, candidates);
+		int best_candidate = best_candidate_and_pos[0];
+		int best_pos = best_candidate_and_pos[1];
+		
+		// Hago el traspase de candidatos a solucion parcial
+		road.insert(road.begin() + best_pos, candidates[best_candidate]);
+		candidates.erase(candidates.begin() + best_candidate);
+	}
+	
+	return road;
+}
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{candidates}} vector con los nodos que faltan por insertar. 
+	\item \textbf{\texttt{road}} vector con la solución parcial. 
+	\item \textbf{\texttt{most\_north}} nodo más al norte.
+	\item \textbf{\texttt{most\_west}} nodo más al oeste.
+	\item \textbf{\texttt{most\_east}} nodo más al este.
+	\item \textbf{\texttt{get\_best\_candidate}} función que dado un camino y un vector de candidatos devuelve un vector con la posición del punto óptimo y dónde queremos insertarlo en el camino. 
+\end{itemize}
+
+Primero calculamos e insertamos en \emph{road} los nodos más al norte, este y oeste, para que se queden dentro los máximos nodos posibles. Mientras que \emph{candidates} no sea vacío calculamos el nodo y la posición con los cuales la distancia que tenemos que recorrer aumenta lo mínimo posible al añadir un nodo, y lo insertamos en \emph{road}, quitándolo de \emph{candidates}.  
+
+\subsubsection{Análisis empírico}
+
+Los tamaños de prueba para ejecutar el algoritmo han ido desde 3 hasta 200 ciudades, cada vez con incremento de 10. A su vez cada iteración la hemos hecho 100 veces y hemos calculado la media, con el fin de eliminar los mejores y peores casos.  
+
+Los datos obtenidos, calculando por un lado el tiempo y por otro la distancia han sido estos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 2.1.} {\sffamily  Datos empíricos para viajante de comercio versión inserción, tiempo}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/insertionTiempo.png}
+	\end{center}	
+\end{datos}
+
+\begin{datos}
+	{\bf\sffamily Gráfico 2.2.} {\sffamily Datos empíricos para viajante de comercio versión inserción, distancia}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/insertionDistancia.png}
+	\end{center}	
+\end{datos}
+
+Los datos se encuentran en una tabla al final del documento.
+
+\pagebreak
+
+\subsection{Enfoque por perturbaciones}
+
+El enfoque por perturbaciones es un algoritmo Greedy cuyo funcionamiento es:ado un recorrido, realiza las perturbaciones indicadas por un parámetro para intentar mejorarlo.  
+
+\begin{lstlisting}[language=C]
+vector<common::Point> get_best_solution(vector<common::Point> points, int perturbations){
+	// Tomo la solucion dada por el snf
+	vector<common::Point> base_road = get_snf_solution(points);
+	
+	// Perturbo el numero de veces indicada
+	for(int i = 0; i < perturbations; i++){
+		// Calculo la posicion respecto a la que perturbar
+		int pos = get_worst_node(points);
+		
+		// Perturbo el camino base
+		perturbate(base_road, pos);
+	}
+	
+	return base_road;
+}
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{points}} vector con los nodos dados. 
+	\item \textbf{\texttt{perturbations}} número de perturbaciones que aplicamos al algoritmo. 
+	\item \textbf{\texttt{get\_snf\_solution}} función que calcula según el algoritmo por cercanía una solución al conjunto de puntos.
+	\item \textbf{\texttt{get\_worst\_node}} función que calcula el nodo tal que según el recorrido actual su distancia al siguiente punto es la mayor.
+	\item \textbf{\texttt{perturbate}} encuentra un camino diferente que haga que el peor nodo mejore y sobrescribe el camino actual.
+\end{itemize}
+
+Primero calculamos una solución inicial con el algoritmo de \emph{cercanía}. Después calculamos el peor nodo de ese recorrido e intentamos encontrar otra combinación de nodos que mejore ese nodo en concreto. Este proceso lo repetimos tantas veces como \emph{perturbations} indique. 
+
+\subsubsection{Análisis empírico}
+
+Los tamaños de prueba para ejecutar el algoritmo han ido desde 10 hasta 200 ciudades, cada vez con incremento de 20. A su vez cada iteración la hemos hecho 100 veces y hemos calculado la media, con el fin de eliminar los mejores y peores casos.  
+
+Los datos obtenidos, calculando por un lado el tiempo y por otro la distancia han sido estos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 2.1.} {\sffamily  Datos empíricos para viajante de comercio versión perturbaciones, tiempo}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/perturbationTiempo.png}
+	\end{center}	
+\end{datos}
+
+\begin{datos}
+	{\bf\sffamily Gráfico 2.2.} {\sffamily Datos empíricos para viajante de comercio versión perturbaciones, distancia}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/perturbationDistancia.png}
+	\end{center}	
+\end{datos}
+
+Los datos se encuentran en una tabla al final del documento.
+
+\pagebreak
+\subsection{Comparación de enfoques}
+
+Los cuatro algoritmos que tenemos son: cercanía, inserción, fuerza bruta y perturbaciones. \\
+Vamos a comparar por separado las gráficas de las distancias y los tiempos de los tres primeros algoritmos. Como el algoritmo de fuerza bruta solo funciona para tamaños muy pequeños pondremos la cota en 10 nodos.
+
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos: tiempo}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/tiempo3.png}
+	\end{center}	
+\end{datos}
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos: distancia}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/distancia3.png}
+	\end{center}	
+\end{datos}
+Podemos ver que las distancias de los tres algoritmos son similares, pero el tiempo que se emplea en obtenerlas es mucho mayor en fuerza bruta. Estudiaremos por tanto los algoritmos \emph{inserción} y \emph{cercanía} por separado. 
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos(cercanía e inserción): tiempo}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/tiempo2.png}
+	\end{center}	
+\end{datos}
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos(cercanía e inserción): distancia}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/distancia2.png}
+	\end{center}	
+\end{datos}
+
+Observamos que las distancias obtenidas con \emph{inserción} son ligeramente mejores, pero al comparar los tiempos \emph{cercanía} es considerablemente más rápido. Por lo general nos interesará más usar este algoritmo, ya que conseguimos resultados parecidos en un tiempo mucho menor. 
+
+Vamos a comparar ahora el algoritmo \emph{cercanía} con nuestro algoritmo: \emph{perturbaciones}
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos(cercanía y perturbaciones): tiempo}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/TiempoC-P.png}
+	\end{center}	
+\end{datos}
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos(cercanía y perturbaciones): distancia}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/graficastsp/DistanciaC-P.png}
+	\end{center}	
+\end{datos}
+
+Observar que la diferencia de tiempo de nuestro algoritmo es considerable respecto a la de \emph{cercanía} y sin embargo la distancia obtenida es similar. Podemos afirmar por tanto que el algoritmo \emph{cercanía} es mejor que el nuestro. 
+\pagebreak
+
+
+
+\end{document}
+ 

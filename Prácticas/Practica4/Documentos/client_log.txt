@@ -1,0 +1,248 @@
+Usuario: mianfg
+Contraseña: holasoymianfg
+
+¡Bienvenido a CarriCar, mianfg!
+
+________________________________________
+
+MENÚ PRINCIPAL
+________________________________________
+
+Opciones
+----------------------------------------
+ 1 : Viajes como conductor
+ 2 : Viajes como pasajero
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 1
+
+________________________________________
+
+1) MENÚ CONDUCTOR
+
+
+[1]: VIAJE #2
+Origen:  Granada
+Destino: Albacete
+Fecha:   2020-01-01
+Conductor: mianfg
+Plazas restantes: 4
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Publicar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 0
+
+________________________________________
+
+Publicar viaje
+
+Origen: Granada
+Destino: Almería
+Plazas: 2
+Fecha (aaaa-mm-dd): 2019-11-27
+
+Viaje añadido correctamente
+
+________________________________________
+
+1) MENÚ CONDUCTOR
+
+
+[1]: VIAJE #2
+Origen:  Granada
+Destino: Albacete
+Fecha:   2020-01-01
+Conductor: mianfg
+Plazas restantes: 4
+
+[2]: VIAJE #4
+Origen:  Granada
+Destino: Almería
+Fecha:   2019-11-27
+Conductor: mianfg
+Plazas restantes: 2
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Publicar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 1
+
+¿Qúe desea hacer con el siguiente viaje?
+
+VIAJE #2
+Origen:  Granada
+Destino: Albacete
+Fecha:   2020-01-01
+Conductor: mianfg
+Plazas restantes: 4
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Cancelar viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 0
+
+Viaje borrado correctamente
+
+________________________________________
+
+1) MENÚ CONDUCTOR
+
+
+[1]: VIAJE #4
+Origen:  Granada
+Destino: Almería
+Fecha:   2019-11-27
+Conductor: mianfg
+Plazas restantes: 2
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Publicar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> -1
+
+________________________________________
+
+MENÚ PRINCIPAL
+________________________________________
+
+Opciones
+----------------------------------------
+ 1 : Viajes como conductor
+ 2 : Viajes como pasajero
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 2
+
+________________________________________
+
+2) MENÚ PASAJERO
+
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Buscar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 0
+
+________________________________________
+
+Buscar viaje
+
+Origen: Granada
+Destino: Albacete
+
+[1]: VIAJE #3
+Origen:  Granada
+Destino: Albacete
+Fecha:   2019-12-19
+Conductor: pedrogallegolpz
+ - alexia
+Plazas restantes: 2
+________________________________________
+
+Opciones
+----------------------------------------
+ 1+ (los números entre corchetes) :
+     Unirse a dicho viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 1
+
+Usuario mianfg añadido correctamente al viaje 3
+
+________________________________________
+
+2) MENÚ PASAJERO
+
+
+[1]: VIAJE #3
+Origen:  Granada
+Destino: Albacete
+Fecha:   2019-12-19
+Conductor: pedrogallegolpz
+ - alexia
+ - mianfg
+Plazas restantes: 1
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Buscar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> -1
+
+________________________________________
+
+MENÚ PRINCIPAL
+________________________________________
+
+Opciones
+----------------------------------------
+ 1 : Viajes como conductor
+ 2 : Viajes como pasajero
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> 2
+
+________________________________________
+
+2) MENÚ PASAJERO
+
+
+[1]: VIAJE #3
+Origen:  Granada
+Destino: Albacete
+Fecha:   2019-12-19
+Conductor: pedrogallegolpz
+ - alexia
+ - mianfg
+Plazas restantes: 1
+________________________________________
+
+Opciones
+----------------------------------------
+ 0 : Buscar viaje
+ 1+ (los números entre corchetes) :
+     Opciones de viaje
+-1 : Atrás
+-2 : Salir
+----------------------------------------
+Inserte una opción -> -2
+
+¡Gracias por usar CarriCar!

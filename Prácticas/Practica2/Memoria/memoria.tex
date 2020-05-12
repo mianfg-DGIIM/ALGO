@@ -1,0 +1,1007 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Plantilla para libro de texto de matemáticas.
+%
+% Esta plantilla ha sido desarrollada desde cero, pero utiliza algunas partes
+% del código de la plantilla original utilizada en apuntesDGIIM
+% (https://github.com/libreim/apuntesDGIIM), basada a su vez en las plantillas
+% 'Short Sectioned Assignment' de Frits Wenneker (http://www.howtotex.com),
+% 'Plantilla de Trabajo' de Mario Román y 'Plantilla básica de Latex en Español'
+% de Andrés Herrera Poyatos (https://github.com/andreshp). También recoge
+% ideas de la plantilla 'Multi-Purpose Large Font Title Page' de
+% Frits Wenneker y Vel (vel@latextemplates.com).
+%
+% Licencia:	
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN BÁSICA DEL DOCUMENTO
+% ---------------------------------------------------------------------------
+
+%\documentclass[11pt, a4paper, twoside]{article} % Usar para imprimir
+\documentclass[10pt, a4paper]{article}
+
+\linespread{1.3}            % Espaciado entre líneas.
+\setlength\parindent{0pt}   % No indentar el texto por defecto.
+\setlength\parskip{7pt}
+
+% ---------------------------------------------------------------------------
+% PAQUETES BÁSICOS
+% ---------------------------------------------------------------------------
+
+% IDIOMA
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla, es-lcroman, es-noquoting]{babel}
+\usepackage[table,xcdraw]{xcolor}
+
+% MATEMÁTICAS
+\usepackage{amsmath}    % Paquete básico de matemáticas
+\usepackage{amsthm}     % Teoremas
+\usepackage{mathrsfs}   % Fuente para ciertas letras utilizadas en matemáticas
+
+% FUENTES
+\usepackage{newpxtext, newpxmath}   % Fuente similar a Palatino
+\usepackage{FiraSans}                 % Fuente sans serif
+\usepackage[T1]{fontenc}
+\usepackage[italic]{mathastext}     % Utiliza la fuente del documento
+                                    % en los entornos matemáticos
+
+% MÁRGENES
+\usepackage[margin=2.5cm, top=3cm]{geometry}
+
+% LISTAS
+\usepackage{enumitem}       % Mejores listas
+\setlist{leftmargin=.5in}   % Especifica la indentación para las listas.
+
+% Listas ordenadas con números romanos (i), (ii), etc.
+\newenvironment{nlist}
+{\begin{enumerate}
+    \renewcommand\labelenumi{(\emph{\roman{enumi})}}}
+  {\end{enumerate}}
+
+%  OTROS
+\usepackage[hidelinks]{hyperref}   % Enlaces
+\usepackage{graphicx}   % Permite incluir gráficos en el documento
+\usepackage{relsize}
+
+% LISTINGS
+\usepackage{listings}
+\usepackage{xcolor}     % Permite definir y utilizar colores
+\usepackage{lipsum}
+\usepackage{courier}
+
+% Fijar tabla a posición
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+% Colores para los bloques de código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+%\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+%\lstset{framextopmargin=50pt,frame=bottomline}
+ 
+% ---------------------------------------------------------------------------
+% COMANDOS PERSONALIZADOS
+% ---------------------------------------------------------------------------
+
+% \equalto
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+
+
+% ---------------------------------------------------------------------------
+% COLORES
+% ---------------------------------------------------------------------------
+
+\definecolor{50}{HTML}{E0F2F1}
+\definecolor{100}{HTML}{B2DFDB}
+\definecolor{200}{HTML}{80CBC4}
+\definecolor{300}{HTML}{4DB6AC}
+\definecolor{400}{HTML}{26A69A}
+\definecolor{500}{HTML}{009688}
+\definecolor{600}{HTML}{00897B}
+\definecolor{700}{HTML}{00796B}
+\definecolor{800}{HTML}{00695C}
+\definecolor{900}{HTML}{004D40}
+
+% ---------------------------------------------------------------------------
+% DISEÑO DE PÁGINA
+% ---------------------------------------------------------------------------
+
+\usepackage{pagecolor}
+\usepackage{afterpage}
+
+% ---------------------------------------------------------------------------
+% CABECERA Y PIE DE PÁGINA
+% ---------------------------------------------------------------------------
+
+\usepackage{fancyhdr}   % Paquete para cabeceras y pies de página
+
+% Indica que las páginas usarán la configuración de fancyhdr
+\pagestyle{fancy}
+\fancyhf{}
+
+% Representa la sección de la cabecera
+\renewcommand{\sectionmark}[1]{%
+\markboth{#1}{}}
+
+% Representa la subsección de la cabecera
+\renewcommand{\subsectionmark}[1]{%
+\markright{#1}{}}
+
+% Parte derecha de la cabecera
+\fancyhead[LE,RO]{\sffamily\textsl{\rightmark} \hspace{1em}  \textcolor{500}{\rule[-0.4ex]{0.2ex}{1.2em}} \hspace{1em} \thepage}
+
+% Parte izquierda de la cabecera
+\fancyhead[RE,LO]{\sffamily{\leftmark}}
+
+% Elimina la línea de la cabecera
+\renewcommand{\headrulewidth}{0pt}
+
+% Controla la altura de la cabecera para que no haya errores
+\setlength{\headheight}{14pt}
+
+% ---------------------------------------------------------------------------
+% TÍTULOS DE PARTES Y SECCIONES
+% ---------------------------------------------------------------------------
+
+\usepackage{titlesec}
+
+% Estilo de los títulos de las partes
+\titleformat{\part}[hang]{\Huge\bfseries\sffamily}{\thepart\hspace{20pt}\textcolor{500}{|}\hspace{20pt}}{0pt}{\Huge\bfseries}
+\titlespacing*{\part}{0cm}{-2em}{2em}[0pt]
+
+% Reiniciamos el contador de secciones entre partes (opcional)
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+% Estilo de los títulos de las secciones, subsecciones y subsubsecciones
+\titleformat{\section}
+  {\Large\bfseries\sffamily}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\Large\sffamily}{\thesubsection}{1em}{}[\vspace{.5em}]
+
+\titleformat{\subsubsection}
+  {\sffamily}{\thesubsubsection}{1em}{}
+
+% ---------------------------------------------------------------------------
+% ENTORNOS PERSONALIZADOS
+% ---------------------------------------------------------------------------
+
+\usepackage{mdframed}
+
+%% DEFINICIONES DE LOS ESTILOS
+
+% Nuevo estilo para definiciones
+\newtheoremstyle{definition-style}  % Nombre del estilo
+{}                                  % Espacio por encima
+{}                                  % Espacio por debajo
+{}                                  % Fuente del cuerpo
+{}                                  % Identación
+{\bf\sffamily}                      % Fuente para la cabecera
+{.}                                 % Puntuación tras la cabecera
+{.5em}                              % Espacio tras la cabecera
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}  % Especificación de la cabecera
+
+% Nuevo estilo para notas
+\newtheoremstyle{remark-style}
+{10pt}
+{10pt}
+{}
+{}
+{\itshape \sffamily}
+{.}
+{.5em}
+{}
+
+% Nuevo estilo para teoremas y proposiciones
+\newtheoremstyle{theorem-style}
+{}
+{}
+{}
+{}
+{\bfseries \sffamily}
+{.}
+{.5em}
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+% Nuevo estilo para ejemplos
+\newtheoremstyle{example-style}
+{10pt}
+{10pt}
+{}
+{}
+{\bf \sffamily}
+{}
+{.5em}
+{\thmname{#1}\thmnumber{ #2.}\thmnote{ #3.}}
+
+% Nuevo estilo para la demostración
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\itshape\sffamily#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+%% ASIGNACIÓN DE LOS ESTILOS
+
+% Teoremas, proposiciones y corolarios
+\newtheoremstyle{theorem-style}{}{}{}{}{}{}{ }{}
+\theoremstyle{theorem-style}
+\newtheorem*{datos}{}
+\theoremstyle{theorem-style}
+\newtheorem{nth}{Teorema}[section]
+\newtheorem{nprop}{Proposición}[section]
+\newtheorem{ncor}{Corolario}[section]
+\newtheorem{lema}{Lema}[section]
+
+% Definiciones
+\theoremstyle{definition-style}
+\newtheorem{ndef}{Definición}[section]
+
+% Notas
+\theoremstyle{remark-style}
+\newtheorem*{nota}{Nota}
+
+% Ejemplos
+\theoremstyle{example-style}
+\newtheorem{ejemplo}{Ejemplo}[section]
+
+% Ejercicios y solución
+\theoremstyle{definition-style}
+\newtheorem{ejer}{Ejercicio}[section]
+
+\theoremstyle{remark-style}
+\newtheorem*{sol}{Solución}
+
+%% MARCOS DE LOS ESTILOS
+
+% Configuración general de mdframe, los estilos de los teoremas, etc
+\mdfsetup{
+  skipabove=1em,
+  skipbelow=1em,
+  innertopmargin=1em,
+  innerbottommargin=1em,
+  splittopskip=2\topsep,
+}
+
+% Definimos los marcos de los estilos
+
+
+\mdfdefinestyle{datos-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0em, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0em, %
+}%
+\mdfdefinestyle{nth-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0em, %
+	innerleftmargin=1em, %
+  innerrightmargin=1em,
+	rightmargin=0em, %
+}%
+
+\mdfdefinestyle{nprop-frame}{
+	linewidth=2pt, %
+	linecolor= 300, %
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ndef-frame}{
+	linewidth=2pt, %
+	linecolor= 500, %
+	backgroundcolor= 50,
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ejer-frame}{
+	linewidth=2pt, %
+	linecolor= 300, %
+	backgroundcolor= 50,
+	topline=false, %
+	bottomline=false, %
+	rightline=false,%
+	leftmargin=0pt, %
+	innerleftmargin=1em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+}%
+
+\mdfdefinestyle{ejemplo-frame}{
+	linewidth=0pt, %
+	linecolor= 300, %
+	leftline=false, %
+	rightline=false, %
+	leftmargin=0pt, %
+	innerleftmargin=1.3em, %
+	innerrightmargin=1em,
+	rightmargin=0pt, %
+	innertopmargin=0em,%
+	innerbottommargin=0em, %
+	splittopskip=\topskip, %
+}%
+
+% Asignamos los marcos a los estilos
+\surroundwithmdframed[style=nth-frame]{nth}
+\surroundwithmdframed[style=datos-frame]{datos}
+\surroundwithmdframed[style=nprop-frame]{nprop}
+\surroundwithmdframed[style=nprop-frame]{ncor}
+\surroundwithmdframed[style=ndef-frame]{ndef}
+\surroundwithmdframed[style=ejer-frame]{ejer}
+\surroundwithmdframed[style=ejemplo-frame]{ejemplo}
+\surroundwithmdframed[style=ejemplo-frame]{sol}
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN DE LA PORTADA
+% ---------------------------------------------------------------------------
+
+\newcommand{\asignatura}{Análisis de eficiencia de algoritmos}
+
+\newcommand{\autor}{Celia Arias Martínez\\Miguel Ángel Fernández Gutiérrez\\Sergio Quijano Rey\\Lucía Salamanca López\\\hspace{1cm}}
+
+\newcommand{\grado}{segfault}
+
+\newcommand{\universidad}{Universidad de Granada}
+
+\newcommand{\enlaceweb}{github.com/DGIIMUnderground}
+
+% ---------------------------------------------------------------------------
+% CONFIGURACIÓN PERSONALIZADA
+% ---------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---------------------------------------------------------------------------
+% COMIENZO DEL DOCUMENTO
+% ---------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% PORTADA EXTERIOR
+% ---------------------------------------------------------------------------
+
+\newpagecolor{500}\afterpage{\restorepagecolor} % Color de la página
+\begin{titlepage}
+
+  % Título del documento
+	\parbox[t]{\textwidth}{
+			\raggedright % Texto alineado a la izquierda
+			\fontsize{40pt}{40pt}\selectfont\sffamily\color{white}{
+				\textbf{\Huge{Práctica 2}}\\\textbf{Divide y vencerás}\\\huge{Algorítmica}
+      }
+	}
+
+	\vfill
+
+	%% Autor e información del documento
+	\parbox[t]{\textwidth}{
+		\raggedright % Texto alineado a la izquierda
+		\sffamily\large\color{white}
+		\grado\\
+		{\Large \autor }\\[15pt]
+		\includegraphics[width=130pt]{ugrlogo.pdf}
+	}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% PÁGINA DE LICENCIA
+% ---------------------------------------------------------------------------
+
+\thispagestyle{empty}
+\null
+\vfill
+
+%% Información sobre la licencia
+\parbox[t]{\textwidth}{
+  \includegraphics{by-nc-sa.pdf}\\[4pt]
+  \raggedright % Texto alineado a la izquierda
+  \sffamily\large
+  {\Large Este trabajo se distribuye bajo una licencia CC BY-NC-SA 4.0.}\\[4pt]
+  Eres libre de distribuir y adaptar el material siempre que reconozcas a los\\
+  autores originales del documento, no lo utilices para fines comerciales\\
+  y lo distribuyas bajo la misma licencia.\\[4pt]
+  \texttt{creativecommons.org/licenses/by-nc-sa/4.0/}
+}
+
+% ---------------------------------------------------------------------------
+% PORTADA INTERIOR
+% ---------------------------------------------------------------------------
+
+\begin{titlepage}
+
+  % Título del documento
+  \parbox[t]{\textwidth}{
+  	\raggedright % Texto alineado a la izquierda
+  	\fontsize{40pt}{40pt}\selectfont\sffamily\color{500}{
+  		\textbf{\Huge{Práctica 2}}\\\textbf{Divide y vencerás}\\\huge{Algorítmica}
+  	}
+  }
+
+	\vfill
+	
+	%% Autor e información del documento
+	\parbox[t]{\textwidth}{
+		\raggedright % Texto alineado a la izquierda
+		\sffamily\large
+		\grado\\
+		{\Large \autor }\\[15pt]
+		\includegraphics[width=130pt]{ugrlogo-dark.pdf}
+	}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% ÍNDICE
+% ---------------------------------------------------------------------------
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+% ---------------------------------------------------------------------------
+% CONTENIDO
+% ---------------------------------------------------------------------------
+
+\part{Introducción}
+
+Esta \textbf{práctica 2}, de divide y vencerás, consiste en dos partes principales:
+
+\begin{itemize}
+	\item \textbf{Problema común:} traspuesta de una matriz de orden $2^k$.
+	\item \textbf{Problema asignado:} mezcla de $k$ vectores ordenados.
+\end{itemize}
+
+\subsection*{Objetivo de esta práctica}
+
+En esta práctica, pretenderemos aproximar la resolución de problemas mediante la técnica \textbf{divide y vencerás}, consistente en la división del problema en subproblemas, y en la resolución de éstos para poder resolver el problema último.
+
+Mediante la aplicación de esta técnica en la resolución de dos problemas diferentes, apreciaremos la utilidad de esta técnica para resolver problemas de forma más eficiente que otras iniciativas sencillas o directas.
+
+Por otra parte, también veremos que esta técnica puede no ser la más favorable en algunas ocasiones, es decir, que las versiones más sencillas pueden tener una mejor complejidad y ser más apropiadas.
+
+\pagebreak
+\part{Desarrollo}
+
+A continuación, estudiaremos los dos algoritmos propuestos.
+
+\section{Traspuesta de una matriz de orden $2^k$}
+
+\begin{datos}
+	{\sffamily Dada una matriz de tamaño $n=2^k$, diseñar el algoritmo que devuelva la traspuesta de dicha matriz.}
+\end{datos}
+
+\subsection{Enfoque sin divide y vencerás}
+
+Para trasponer una matriz cualquiera, basta recorrer la parte triangular superior e ir intercambiando los términos $a_{ij}$ por los $a_{ji}$ de la matriz.\\
+
+\begin{lstlisting}[language=C]
+void traspuesta_noDyV(int **mat, int N) {
+	int aux;
+	
+	for ( int i = 0; i < N; i++ )
+		for ( int j = i+1; j < N; j++ )
+			if ( i != j ) {
+				aux = mat[j][i];
+				mat[j][i] = mat[i][j];
+				mat[i][j] = aux;
+			}
+}
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{mat}} es la matriz que se va a trasponer.
+	\item \textbf{\texttt{N}} es el tamaño de la matriz.
+\end{itemize}
+
+Procederemos ahora a realizar el análisis teórico y empírico de este algoritmo.
+
+\subsubsection{Análisis teórico}
+
+Vemos que, al tener dos bucles anidados, el orden de complejidad es:
+
+$$T(n) \in O(n^2)$$
+
+Por tanto, tenemos un algoritmo $\boldsymbol{O(n^2)}$.
+
+\subsubsection{Análisis empírico}
+
+Realizando 100 ejecuciones por cada tamaño de matriz, con tamaños de matriz desde $2^2$ hasta $2^{15}$. Obtenemos de este modo los siguientes datos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.1.} {\sffamily Datos empíricos para trasposición de matrices (no divide y vencerás)}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/trasponer_iter_funcion.png}
+	\end{center}	
+\end{datos}
+
+Realizando comprobaciones con el software de \emph{plotting}, hemos concluido que los datos experimentales se adaptan a nuestro análisis teórico del algoritmo. Dichos datos experimentales se encuentran en el anexo, al final de este documento.
+
+\pagebreak
+
+\subsection{Enfoque con divide y vencerás}
+
+El enfoque divide y vencerás, en este caso, es recursivo: dividiremos la matriz en cuatro trozos e iremos intercambiando las submatrices superior derecha e inferior izquierda, y así sucesivamente.\\
+
+\begin{lstlisting}[language=C]
+void trasponerRec(int **mat, int inicio_c, int fin_c, int fila) {
+    if ( fin_c - inicio_c > 1 ) {
+        int aux;
+
+        for ( int i = fila; i < fila + (fin_c - inicio_c)/2; i++ ) {
+            for ( int j = inicio_c + (fin_c - inicio_c)/2; j < fin_c; j++ ) {
+                aux = mat[i + (fin_c - inicio_c)/2][j-(fin_c - inicio_c)/2];
+                mat[i + (fin_c - inicio_c)/2][j-(fin_c - inicio_c)/2] = mat[i][j];
+                mat[i][j] = aux;
+            }
+        }
+
+        trasponerRec(mat, inicio_c, inicio_c+(fin_c-inicio_c)/2, fila);
+        trasponerRec(mat, inicio_c+(fin_c-inicio_c)/2, fin_c, fila);
+        trasponerRec(mat, inicio_c, inicio_c+(fin_c-inicio_c)/2, fila+(fin_c-inicio_c)/2);
+        trasponerRec(mat, inicio_c+(fin_c-inicio_c)/2, fin_c, fila+(fin_c-inicio_c)/2);
+    }
+}
+
+void trasponer(int **mat, int tam) {
+    trasponerRec(mat, 0, tam, 0);
+}
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{mat}} es la matriz que se va a trasponer.
+	\item \textbf{\texttt{inicio\_c}} es la columna que acota la matriz que se dividirá por la izquierda.
+	\item \textbf{\texttt{fin\_c}} es la columna que acota la matriz que se dividirá por la derecha.
+	\item \textbf{\texttt{fila}} es la fila donde comienza la submatriz que se dividirá. La altura se puede calcular mediante los parámetros anteriores, al ser las submatrices cuadradas.
+\end{itemize}
+
+\subsubsection{Análisis teórico}
+
+Para calcular la eficiencia teórica, analizaremos la función \texttt{trasponerRec}, que es el que realiza la recursividad. Por tanto, en primer lugar calcularemos la eficiencia de los dos \texttt{for} anidados.
+
+Podemos ver que el \texttt{for} interno tiene una eficiencia de:
+$$ \sum^{fin_c-1}_{inicio_c+\frac{fin_c-inicio_c}{2}}1=fin_c-1-\left(inicio_c+\frac{fin_c-inicio_c}{2}\right)+1=\frac{fin_c-inicio_c}{2}$$
+Llamaremos $n=\frac{fin_c-inicio_c}{2}$.
+
+La eficiencia del \texttt{for} externo será de:
+$$ \sum_{fila}^{fila+n-1} n = n(fila+n-1-fila+1) = n^2 $$
+Obteniendo de este modo la siguiente ecuación en recurrencia:
+$$ T(n) = n^2 + 4T(n/2) $$
+
+Que resolveremos a continuación:
+\begin{align*}
+T(n) &= n^2 + 4T(n/2)\\
+T(2^k) &= (2^k)^2 + 4T(2^{k-1})
+\end{align*}
+\begin{align*}
+T(2^k) - 4T(2^{k-1}) &= 4^k\\
+(x-4)(x-4)=(x-4)^2 &= 0
+\end{align*}
+\begin{align*}
+T_k &= c_1*4^k + c_2*k*4^k\\
+T_n &= 2c_1*n^2+2c_2*n^2\log n
+\end{align*}
+
+Por lo que:
+$$T(n)\in O(n^2\log n)$$
+
+\pagebreak
+
+\subsubsection{Análisis empírico}
+
+Del mismo modo, realizamos 100 ejecuciones por cada tamaño de matriz, con tamaños de matriz desde $2^2$ hasta $2^{15}$. Obtenemos de este modo los siguientes datos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.2.} {\sffamily Datos empíricos para trasposición de matrices (divide y vencerás)}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/trasponer_div_funcion.png}
+	\end{center}	
+\end{datos}
+
+Realizando comprobaciones con el software de \emph{plotting}, hemos concluido que los datos experimentales se adaptan a nuestro análisis teórico del algoritmo. Dichos datos experimentales se encuentran en el anexo, al final de este documento.
+
+\pagebreak
+\subsection{Comparación de enfoques}
+
+Vemos que tenemos la siguiente complejidad en los algoritmos:
+
+\begin{itemize}
+	\item La versión no divide y vencerás tiene una complejidad $O(n^2)$.
+	\item La versión divide y vencerás tiene una complejidad $O(n^2 \log n)$.
+\end{itemize}
+
+Tenemos que:
+$$n^2 \log n \geq n^2 \hspace{1cm}\forall n\geq 1$$
+
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos para trasposición de matrices}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/trasponer_ambos.png}
+	\end{center}	
+\end{datos}
+
+
+Por tanto, tenemos que \textbf{la versión no divide y vencerás es más eficiente}. De este modo, no tiene sentido realizar un estudio de valor umbral alguno, pues esta versión es mejor en todos los casos.
+
+\pagebreak
+
+\section{Mezcla de vectores ordenados}
+
+\begin{datos}
+	{\sffamily Se tienen $k$ vectores ordenados (de menor a mayor), cada uno con $n$ elementos, y queremos combinarlos en un único vector ordenado (con $kn$ elementos).}
+\end{datos}
+
+\subsection{Enfoque sin divide y vencerás}
+
+Para mezclar un vector de vectores, programamos la mezcla de vectores dos a dos, y vamos mezclando los dos primeros sucesivamente hasta obtener la mezcla completa. En cada mezcla, reduciremos en 1 el número de vectores del vector de vectores, consiguiendo el resultado deseado.\\
+
+\begin{lstlisting}[language=C]
+vector<int> merge(vector<int> v1, vector<int> v2) {
+	vector<int> merged(v1.size() + v2.size());
+	int pos1 = 0, pos2 = 0;
+	
+	while ( pos1 < v1.size() || pos2 < v2.size() )
+		if ( pos1 == v1.size() ) {
+			merged[pos1 + pos2] = v2[pos2]; pos2++;
+		} else if ( pos2 == v2.size() ) {
+			merged[pos1 + pos2] = v1[pos1];	pos1++;
+		} else
+			if ( v1[pos1] < v2[pos2] ) {
+				merged[pos1 + pos2] = v1[pos1]; pos1++;
+			} else {
+				merged[pos1 + pos2] = v2[pos2]; pos2++;
+			}
+	return merged;
+}
+
+vector<vector<int> > merge_first_two_vectors(vector<vector<int> > matrix) {
+	// Matriz con un vector menos, resultado de la mezcla
+	vector<vector<int> > merged_matrix(matrix.size() - 1);
+	// Vector que hemos mezclado
+	vector<int> merged = merge(matrix[0], matrix[1]);
+	// Calculamos los datos de la nueva matriz
+	merged_matrix[0] = merged;
+	for ( int i = 1; i < merged_matrix.size(); i++ )
+		merged_matrix[i] = matrix[i+1];
+	return merged_matrix;
+}
+
+vector<int> merge_vectors_basic(vector<vector<int> > matrix){
+	// Caso base para parar la recursividad
+	if ( matrix.size() == 1 )
+		return matrix[0];	
+	else {
+		matrix = merge_first_two_vectors(matrix);
+		return merge_vectors_basic(matrix);
+	}
+}
+\end{lstlisting}
+
+Nótese que hemos utilizado la clase \texttt{vector} de la STL, para facilidad a la hora de programar y explicar el algoritmo. A efectos prácticos, de este modo conseguimos que el algoritmo sea fácilmente ``traducible'' a otros lenguajes de programación.
+
+En este código, tenemos tres funciones:
+
+\begin{itemize}
+	\item \textbf{\texttt{merge}}, que realiza la mezcla (intercambio de elementos) de dos vectores.
+	\begin{itemize}
+		\item \textbf{\texttt{v1}} y \textbf{\texttt{v2}} son los vectores que se mezclan.
+		\item El \textbf{retorno}, de tipo \texttt{vector<int>}, es el vector mezclado.
+	\end{itemize}
+	\item \textbf{\texttt{merge\_first\_two\_vectors}}, que realiza la mezcla de los dos primeros vectores.
+	\begin{itemize}
+		\item \textbf{\texttt{matrix}} es el vector de vectores.
+		\item El \textbf{retorno}, de tipo \texttt{vector<vector<int> >}, es el vector de vectores con los dos primeros vectores mezclados.
+	\end{itemize}
+	\item \textbf{\texttt{merge\_vectors\_basic}} realiza la mezcla.
+	\begin{itemize}
+		\item \textbf{\texttt{matrix}} es el vector de vectores.
+		\item El \textbf{retorno}, de tipo \texttt{vector<int>}, es el vector ordenado.
+	\end{itemize}
+\end{itemize}
+
+Procederemos ahora a realizar el análisis teórico y empírico de este algoritmo.
+
+\subsubsection{Análisis teórico}
+
+En primer lugar, tenemos la función \texttt{merge}, que en el peor de los casos recorre dos vectores, con un tiempo $2k$, siendo la $k$ una constante, por lo que:
+$$T(n) = k·1 \in O(1)$$.
+
+Además, tenemos la función \texttt{merge\_first\_two\_vectors}, que llama a la función \texttt{merge}, que como hemos calculado anteriormente es $O(1)$, y al ser el bucle \texttt{for} $O(n)$, tenemos que esta función es:
+$$ T(n) \in O(n)$$
+
+Por otra parte, la función \texttt{merge\_vectors\_basic} hace $n-1$ veces la función \texttt{merge\_first\_two\_vectors}, luego:
+$$T(n) = (n-1)*n \in O(n^2)$$
+
+Por tanto, tenemos un algoritmo $\boldsymbol{O(n^2)}$.
+
+\pagebreak
+
+\subsubsection{Análisis empírico}
+
+Para estudiar el análisis empírico hemos dejado el tamaño de vector constante y hemos variado el número de vectores desde $2^1$ hasta $2^{15}$. Por cada valor de $n$ hemos realizado 100 ejecuciones y hemos hecho la media para obtener resultados más precisos.
+
+\begin{datos}
+	{\bf\sffamily Gráfico 2.1.} {\sffamily Datos empíricos para mezcla de vectores (no divide y vencerás)}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/merge_iter_funcion.png}
+	\end{center}	
+\end{datos}
+
+Realizando comprobaciones con el software de \emph{plotting}, hemos concluido que los datos experimentales se adaptan a nuestro análisis teórico del algoritmo. Dichos datos experimentales se encuentran en el anexo, al final de este documento.
+
+\pagebreak
+
+\subsection{Enfoque con divide y vencerás}
+
+El enfoque divide y vencerás, en este caso, es recursivo: convertimos la matriz original en otras con la mitad de filas y el doble de columnas, donde las filas que obtenemos son los vectores ordenados. Consideraremos que la matriz es un vector de vectores.\\
+
+\begin{lstlisting}[language=C]
+vector<int> merge(vector<int> v1, vector<int> v2){
+	vector<int> merged(v1.size() + v2.size());
+	int pos1 = 0, pos2 = 0;
+	
+	while(pos1 < v1.size() || pos2 < v2.size()){
+		if(pos1 == v1.size()){
+			merged[pos1 + pos2] = v2[pos2]; pos2++;
+		}else if(pos2 == v2.size()){
+			merged[pos1 + pos2] = v1[pos1];	pos1++;
+		}else{
+			if(v1[pos1] < v2[pos2]){
+				merged[pos1 + pos2] = v1[pos1]; pos1++;
+			}else{
+			merged[pos1 + pos2] = v2[pos2]; pos2++;
+			}
+		}
+	}
+	return merged;
+}
+	
+vector<vector<int> > merge_two_by_two(vector<vector<int> > matrix){
+	// Generamos la nueva matriz
+	int new_size = (matrix.size() / 2) + matrix.size() % 2;
+	vector<vector<int> > merged_matrix(new_size);
+	
+	// Tomamos los datos de la nueva matriz
+	for(int i = 0; i < merged_matrix.size(); i++){
+		// Ultimo elemento de la matriz sin hacer merge
+		if(2*i + 1 >= matrix.size()){
+			merged_matrix[i] = merged_matrix[2*i + 1];
+		}
+		
+		vector<int> new_vector = merge(matrix[2*i], matrix[2*i + 1]);
+		merged_matrix[i] = new_vector;
+	}
+	return merged_matrix;
+}
+
+vector<int> merge_divide_and_conquer(vector<vector<int> > matrix){
+	// Caso base para finalizar la recursividad
+	if(matrix.size() == 1){
+		return parse_matrix_to_vector(matrix);
+	}
+	// Reducimos el problema aplicando recursividad
+	matrix = merge_two_by_two(matrix);
+	return merge_divide_and_conquer(matrix);
+}
+
+
+\end{lstlisting}
+
+En este código, tenemos que:
+\begin{itemize}
+	\item \textbf{\texttt{matrix}} es la matriz de vectores que queremos ordenar: el número de filas es el número de vectores que tenemos y el número de columnas el tamaño de vector.
+
+\end{itemize}
+
+\subsubsection{Análisis teórico}
+
+Para calcular la eficiencia teórica, analizaremos la función \texttt{merge\_divide\_and\_conquer}, que es la función principal, y la función \texttt{merge\_two\_by\_two}. La función \texttt{merge} es la utilizada en el algoritmo sin divide y vencerás y sabemos que es de tiempo constante para tamaño de vector constante, por tanto es O(1). 
+\begin{itemize}
+	\item \textbf{\texttt{merge\_divide\_and\_conquer}} realiza una comprobación de parada que es O(1). Después llama a la función \texttt{merge\_two\_by\_two} y vuelve a llamarse a si misma con tamaño de matriz igual a la mitad.
+	\item \textbf{\texttt{merge\_two\_by\_two}} genera una nueva matriz de tamaño la mitad. Después recorre esta nueva matriz en un bucle for donde llama a funciones que son O(1). Por tanto la eficiencia de la función será $O\left(\frac{n}{2}\right)$.
+\end{itemize}
+Por tanto la recurrencia del algoritmo será:
+
+\begin{align*}
+T(n) &= T\left(\frac{n}{2}\right)+\frac{n}{2}*k+1\\
+T(n) &= T\left(\frac{n}{2}\right) + nk +1
+\end{align*}
+\begin{align*}
+T(2^m) - T(2^{m-1}) = 2^{mk}+1 \\
+(x-1)^2(x-2) = 0
+\end{align*}
+\begin{align*}
+T_m &= c_1 + c_2m +c_32^m \\
+T_n &= c_1 + c_2log(n) + c_3n
+\end{align*}
+
+Por lo que:
+$$T(n) \in O(n)$$
+
+\pagebreak
+
+\subsubsection{Análisis empírico}
+
+Para estudiar el análisis empírico hemos dejado el tamaño de vector constante y hemos variado el número de vectores desde $2^1$ hasta $2^{15}$. Por cada valor de $n$ hemos realizado 100 ejecuciones y hemos hecho la media para obtener resultados más precisos.
+
+Obtenemos de este modo los siguientes datos:
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.2.} {\sffamily Datos empíricos para trasposición de matrices (divide y vencerás)}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/merge_div_funcion.png}
+	\end{center}	
+\end{datos}
+
+Realizando comprobaciones con el software de \emph{plotting}, hemos concluido que los datos experimentales se adaptan a nuestro análisis teórico del algoritmo. Dichos datos experimentales se encuentran en el anexo, al final de este documento.
+
+\pagebreak
+\subsection{Comparación de enfoques}
+
+Vemos que tenemos la siguiente complejidad en los algoritmos:
+
+\begin{itemize}
+	\item La versión no divide y vencerás tiene una complejidad $O(n^2)$.
+	\item La versión divide y vencerás tiene una complejidad $O(n)$.
+\end{itemize}
+
+Evidentemente, tenemos una clara diferencia: en general, para valores grandes, será mejor usar la versión divide y vencerás. Para poder encontrar el \textbf{umbral}, es decir, el límite a partir del cual pasar de la ejecución de la versión no divide y vencerás a la que usa esta técnica, basta calcular el punto de intersección de los datos experimentales.
+
+
+\begin{datos}
+	{\bf\sffamily Gráfico 1.3.} {\sffamily Contraste de datos empíricos para mezcla de vectores}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/merge_ambos.png}
+	\end{center}	
+\end{datos}
+
+Calculando el punto de intersección, establecemos que:
+$$ \text{\texttt{UMBRAL}} = 2$$
+
+Es decir, que antes de llegar a 2 vectores es más eficiente usar la versión no divide y vencerás. A partir de ahí, es mejor utilizar la versión que usa esta técnica. Esto es más evidente si vemos la siguiente gráfica:
+\pagebreak
+\begin{datos}
+	{\bf\sffamily Gráfico 1.4.} {\sffamily Contraste de datos empíricos para mezcla de vectores: encontrar umbral}\\
+	\vspace{-0.7cm}
+	\begin{center}
+		\includegraphics[width=15cm]{../Graficas/merge_ambos_zoom.png}
+	\end{center}	
+\end{datos}
+
+Vemos en esta gráfica cómo el algoritmo de fuerza bruta es más eficiente que el divide y vencerás para valores muy pequeños, tan pequeños que ni siquiera es necesario establecer esta división. Bastaría, por tanto, usar el algoritmo versión divide y vencerás en todos los casos.
+
+\pagebreak
+\part{Conclusiones}
+
+Mediante la realización de esta práctica, hemos podido observar que existen métodos de creación de algoritmos, como el \textbf{divide y vencerás}, que nos permiten crear algoritmos más eficientes.
+
+Sin embargo, esto no es así en la totalidad de los casos: hemos visto cómo, en el caso de la trasposición de matrices, es más eficiente el algoritmo no divide y vencerás.
+
+Es cierto, por otro lado, que este enfoque nos ofrece un código con mejor legibilidad y con una mayor consistencia a la hora de mantenerlo.
+
+Por ello, incidimos en la máxima importancia del estudio de los algoritmos (tanto teórico como empírico e híbrido), previo a la implementación de un algoritmo, pues es necesario ser metódicos en esto: para conseguir algoritmos eficientes, debemos comprobar su eficiencia.
+
+\pagebreak
+
+\part{Anexo: datos}
+
+\begin{center}
+	\sffamily{\textbf{Datos 1.} Datos de trasposición de matrices}
+\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|r|l|l|l|l|}
+\cline{1-2} \cline{4-5}
+\multicolumn{2}{c}{\cellcolor[HTML]{4DB6AC}\textbf{Versión no DyV}} & & \multicolumn{2}{c}{\cellcolor[HTML]{4DB6AC}\textbf{Versión DyV}} \\
+\cline{1-2} \cline{4-5}
+\multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{\emph{n}}} & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{Tiempo} (ms)} & & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{\emph{n}}} & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{Tiempo} (ms)}\\
+\cline{1-2} \cline{4-5}
+4 & 0 & & 4 & 0 \\
+  8 & 0 & & 8 & 0  \\
+ 16 & 0 & & 16 & 2  \\
+32 &  2 & & 32 &  12\\
+ 64 & 9 & & 64 & 66  \\
+ 128 & 36 & & 128 & 295  \\
+ 256 & 211 & & 256 & 1158  \\
+512 &  808 & & 512 & 4934  \\
+ 1024 & 3232 & & 1024 & 22269  \\
+ 2048 & 16246 & & 2048 & 97704  \\
+ 4096 & 74732 & & 4096 & 421759 \\
+8192 &  324066 & & 8192 & 1850125  \\
+16384 & 1693193 & & 16384 & 7887955 \\
+ \cline{1-2} \cline{4-5}
+
+\end{tabular}
+\end{table}
+\vspace{0.5cm}
+\begin{center}
+	\sffamily{\textbf{Datos 2.} Datos de mezcla de vectores}
+\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|r|l|l|l|l|}
+\cline{1-2} \cline{4-5}
+\multicolumn{2}{c}{\cellcolor[HTML]{4DB6AC}\textbf{Versión no DyV}} & & \multicolumn{2}{c}{\cellcolor[HTML]{4DB6AC}\textbf{Versión DyV}} \\
+\cline{1-2} \cline{4-5}
+\multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{\emph{n}}} & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{Tiempo} (ms)} & & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{\emph{n}}} & \multicolumn{1}{c}{\cellcolor[HTML]{80CBC4}\textbf{Tiempo} (ms)}\\
+\cline{1-2} \cline{4-5}
+1 & 9 & & 1 & 11  \\
+ 2 & 90 & & 2 & 85  \\
+ 4 & 373 & & 4 & 312  \\
+8 &  1361 & & 8 &  918\\
+ 16 & 4686 & & 16 & 2269  \\
+ 32 & 14703 & & 32 & 5248  \\
+ 64 & 53595 & & 64 & 11440  \\
+128 & 191746 & & 128 & 25138  \\
+ 256 & 779673 & &  256 & 52225  \\
+ 512 & 3386729 & & 512 & 117243  \\
+ 1024 & 14632810 & & 1024 & 207686 \\
+ \cline{1-2} \cline{4-5}
+
+\end{tabular}
+\end{table}
+
+\end{document}
+ 

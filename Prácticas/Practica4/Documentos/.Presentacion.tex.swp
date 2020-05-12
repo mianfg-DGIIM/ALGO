@@ -1,0 +1,966 @@
+% Tipo de documento (presentación)
+\documentclass[10pt, xcolor=table]{beamer}
+
+% Cargar el tema
+\usetheme{metropolis}
+
+%  __________
+% |          |
+% | Paquetes |
+% |__________|
+
+% Paquetes de idioma
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla, es-lcroman, es-noquoting]{babel}
+
+% Paquete para código fuente
+% LISTINGS
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{courier}
+
+% Colores para los bloques de código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+% Paquete de numeración en Beamer
+\usepackage{appendixnumberbeamer}
+
+% Paquete de uso para plantilla
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+% Paquete para controlar espacios
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+% Paquetes para matemáticas
+\usepackage{amsmath}    % Paquete básico de matemáticas
+\usepackage{amsthm}     % Teoremas
+\usepackage{mathrsfs}   % Fuente para ciertas letras utilizadas en matemáticas
+
+% Paquetes para fuentes
+\usepackage{newpxtext, newpxmath}   % Fuente similar a Palatino
+\usepackage{FiraSans}               % Fuente sans serif
+\usepackage[T1]{fontenc}
+\usepackage[italic]{mathastext}     % Utiliza la fuente del documento
+                                    % en los entornos matemáticos
+
+%  ________________________
+% |                        |
+% | Configuración del tema |
+% |________________________|
+
+% Configuración básica del tema
+\metroset{
+  % tema oscuro ('dark') o claro ('light'). No tiene efecto al usar la
+  % paleta de colores más adelante
+  background=light,
+  % 'none' para eliminar la diapositiva inicial de cada sección
+  sectionpage=progressbar,
+  % 'progressbar' o 'simple' para añadir una diapositiva inicial a cada subsección
+  subsectionpage=none,
+  % contador de página: 'none', 'counter' o 'fraction'
+  numbering=none,
+  % barra de progreso: 'none', 'head', 'frametitle' o 'foot'
+  progressbar=frametitle,
+  % fondo de los bloques estilo teorema: 'transparent' o 'fill'
+  block=fill,
+}
+
+% Paleta de colores
+\definecolor{accent}{HTML}{009688}
+\colorlet{darkaccent}{accent!70!black}
+\definecolor{foreground}{RGB}{0, 0, 0}
+\definecolor{background}{RGB}{255, 255, 255}
+
+% Insertar los colores en el tema
+\setbeamercolor{normal text}{fg=foreground, bg=background}
+\setbeamercolor{alerted text}{fg=darkaccent, bg=background}
+\setbeamercolor{example text}{fg=foreground, bg=background}
+\setbeamercolor{frametitle}{fg=background, bg=accent}
+
+\setbeamercolor{headtitle}{fg=background!70!accent,bg=accent!90!foreground}
+\setbeamercolor{headnav}{fg=background,bg=accent!90!foreground}
+\setbeamercolor{section in head/foot}{fg=background,bg=accent}
+
+\defbeamertemplate*{headline}{miniframes theme no subsection}{
+  % Caja para mostrar título y autor encima de cada diapositiva
+  % Nosotros no 
+  %% \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,
+  %%     leftskip=.3cm,rightskip=.3cm plus1fil]{headtitle}
+  %%   {\usebeamerfont{title in head/foot}\insertshorttitle}
+  %%   \hfill
+  %%   \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}
+  %% \end{beamercolorbox}
+  %% \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  %% \end{beamercolorbox}
+
+  % Caja para mostrar navegación encima de cada diapositiva
+  \begin{beamercolorbox}{headnav}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+
+%  _________
+% |         |
+% | Ajustes |
+% |_________|
+
+% Fijar tabla a posición
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%  ________
+% |        |
+% | Título |
+% |________|
+
+\title{Programación Dinámica}
+\subtitle{Algorítmica. \alert{Práctica 4}}
+\date{}
+\author{Celia Arias Martínez\\Miguel Ángel Fernández Gutiérrez\\Sergio Quijano Rey\\Lucía Salamanca López\\[4pt]\footnotesize{segfault}}
+\titlegraphic{\hfill\includegraphics[width=2.5cm]{ugrlogo-dark.pdf}}
+
+%  ___________
+% |           |
+% | Documento |
+% |___________|
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Contenidos}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents[]
+\end{frame}
+
+
+\section{Introducción}
+
+\begin{frame}{Objetivo de esta práctica}
+\begin{itemize}
+
+    \item Apreciar la utilidad de la \textit{programación} dinámica para resolver problemas que involucran recursividad, de forma eficiente.
+
+    \item \textbf{Problema escogido}: Subsecuencia de caracteres más larga (\textit{LCS} o \textit{Largest Common Sequence})
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Descripción del problema}
+\begin{itemize}
+    \item El problema consiste en encontrar la máxima subsecuencia de caracteres común que aparecen
+    en ambas cadenas de izquierda a derecha (no necesariamente de forma contigua).
+    
+\end{itemize}
+\end{frame}
+
+\begin{frame}{EJEMPLO}
+\begin{center}
+	\includegraphics[width=200px]{./diagrama.png}
+\end{center}
+
+\end{frame}
+
+
+
+\begin{section}{Diseño de la solución}
+	
+\begin{frame}{TCS Programación Dinámica}
+Aplicamos PD en \textbf{cuatro fases}:
+
+\begin{enumerate}
+	\item Verificar la naturaleza n-etápica del problema.
+	\item Verificación del POB.
+	\item Plantear una recurrencia. 
+	\item Calcular la solución.
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{TCS Programación Dinámica. \normalfont{Naturaleza n-etápica}}
+El resultado es consecuencia de una sucesión de decisiones: en la etapa \textit{n} debemos elegir qué cadena de caracteres dejamos fija y qué puntero movemos hacia la derecha. 
+
+Una solución optimal es aquella que proporcione la subsecuencia de caracteres más larga.
+
+\end{frame}
+
+\begin{frame}{TCS Programación Dinámica. \normalfont{Verificación del POB}}
+
+\textbf{Función a maximizar}: número de caracteres en común en las dos subsecuencias. Tendremos, por tanto, en la etapa n:
+$$
+f_n(i,j) = max((f(i-1,j),f(i,j-1)+h(i,j)
+$$
+
+\begin{itemize}
+	\item $h(i,j)$: función que dados dos índices (de distintas subcadenas), devuelve 1 si coinciden y 0 en otro caso.
+\end{itemize}
+
+\textbf{Caso base}:
+$$
+f_1(i,j) = max (h(i,j)) = h(i,j)
+$$
+Es obvio que la solución proporcionada en la etapa n es optimal, pues estamos calculando el máximo de dos funciones optimales.
+
+\end{frame}
+
+\begin{frame}{TCS Programación Dinámica. \normalfont{Plantear una recurrencia}}
+\textbf{Recurrencia planteada}
+$$ LCS{[i,j]}= \left\{\begin{matrix} 1+LCS[i-1,j-1] \\ max ({LCS[i-1,j],LCS[i,j-1]})\end{matrix}\right. $$
+
+Conseguimos asegurar el Principio de Optimalidad: si estamos en la etapa n, las decisiones tomadas hasta la etapa n-1 son óptimas.
+
+\end{frame}
+
+\begin{frame}{TCS Programación Dinámica. \normalfont{Calcular la solución}}
+Lo más relevante del algoritmo es calcular la matriz que nos da la solución.
+\begin{center}
+	\textbf{\large{EJEMPLO}}
+\end{center}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c}
+		$\left(\begin{matrix} & &\textbf{B}&\textbf{O}&\textbf{L}&\textbf{S}&\textbf{A}\\&0&0&0&0&0&0\\\textbf{S}&0&0&0&0&1&1\\\textbf{A}&0&0&0&0&1&2\\\textbf{B}&0&1&1&1&1&2\\\textbf{O}&0&1&2&2&2&2\\\textbf{R}&0&1&2&2&2&2\\\end{matrix}\right)$
+		
+	\end{tabular}
+\end{table}
+
+
+\end{frame}
+
+
+\begin{frame}{Gráfica tiempos. \normalfont{Programación Dinámica}}
+	
+\includegraphics[width=\textwidth]{../Graficas/lcs_dinamic.png}
+	
+\end{frame}
+
+\begin{frame}{TCS Fuerza bruta. \normalfont{Explicación}}
+
+\begin{center}
+ 	\textbf{\large{PASOS:}}
+ 	\begin{enumerate}
+		\item Calculamos las posibles subcadenas de las dos palabras.
+		\item Comprobamos las que son iguales
+ 		\item Devolvemos la subcadena de mayor longitud.
+ 	\end{enumerate}
+ \end{center}
+
+\end{frame}
+
+
+
+\begin{section}{Conclusiones}
+\begin{frame}{Conclusión}
+contenidos...
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{frame}{Problema común}
+% Utilizaremos dos enfoques diferentes:
+% \begin{itemize}
+% 	\item \textbf{Basado en cercanía:} (\textit{el vecino más cercano}) dada una ciudad inicial \textit{$v_0$}, se agrega como ciudad siguiente aquella \textit{$v_i$} (no incluída en el circuito) que se encuentre más cercana a \textit{$v_0$}. El procedimiento se repite hasta que todas las ciudades se hayan visitado.
+% 	\item \textbf{Basado en inserción:} se comienza con un recorrido parcial y luego se extiende insertando las ciudades restantes mediante algún criterio de tipo voraz.
+% \end{itemize}
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}{Problema a asignar}
+% \begin{center}
+% \textbf{\large{Trabajadores y Tareas}}
+% \end{center}
+% \begin{itemize}
+% 	\item Disponemos de \textit{n} trabajadores y \textit{n} tareas.
+% 	\item \textbf{\textit{$c_{i,j}>0$}}: coste de asignarle la tarea \textit{j} al trabajador \textit{i}.
+% 	\item \textbf{Asignación válida}: a cada trabajador le corresponde una tarea y cada tarea la realiza un trabajador diferente.
+% 	\item \textbf{Coste de la asignación}: es la suma total de los costes individuales.
+% \end{itemize}
+% 
+% Se debe diseñar un algoritmo voraz para obtener una asignación de tareas a trabajadores óptimas
+% 
+% \end{frame}
+% 
+% \section{Desarrollo y análisis de los algoritmos}
+% \begin{frame}{Algoritmos analizados}
+% Como hemos explicado anteriormente, hemos desarrollado y analizado los siguientes algoritmos:
+% \begin{enumerate}
+% 	\item \textbf{TSP}
+% 	\item \textbf{Trabajadores y Tareas}
+% \end{enumerate}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Calcula la mejor solucion para un conjunto de puntos, por Shortest Neighbor First
+% * @param points, el conjunto de puntos sobre el que vamos a operar
+% * @pre points.size() > 0
+% * @return el camino cuya distancia es la minima
+% * */
+% vector<common::Point> get_best_solution(vector<common::Point> points){
+% vector<common::Point> road;                 // Solucion que vamos a construir
+% vector<common::Point> points_left = points; // Puntos que quedan por aniadir a la solucion
+% 
+% // Parto siempre del primer punto del vector
+% road.push_back(points_left[0]);
+% points_left.erase(points_left.begin() + 0);
+% 
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía }
+% \begin{lstlisting}[language=C]
+% // Voy construyendo la solucion, sacando puntos de points_left y colocandolos en road
+% while(points_left.size() > 0){
+% 	double min_distance = common::distance(road[road.size() -1], points_left[0]);
+% 	int min_pos = 0;
+% 
+% 	// Buscamos el punto mas cercano
+% 	for(int i = 0; i < points_left.size(); i++){
+% 		double current_distance = common::distance(road[road.size() -1], points_left[i]);
+% 		if(current_distance < min_distance){
+% 			min_distance = current_distance;
+% 			min_pos = i;
+% 		}
+% 	}
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía }
+% \begin{lstlisting}[language=C]
+% // Aniadimos el punto mas cercano a la solucion y lo quitamos de los puntos que faltan
+% 	road.push_back(points_left[min_pos]);
+% 	points_left.erase(points_left.begin() + min_pos);
+% }
+% 
+% return road;
+% }
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía \normalfont{Explicación}}
+% \begin{center}
+% 	\textbf{\large{PASOS:}}
+% 	\begin{enumerate}
+% 		\item Partimos del nodo $0$
+% 		\item Encontramos, en el vector de nodos disponibles, el más cercano al anterior.
+% 		\item Eliminamos el escogido del vector.
+% 		\item Repetimos los pasos anteriores con los nuevos nodos hasta que el vector se quede vacío.
+% 		\item Finalmente devuelve el camino.
+% 	\end{enumerate}
+% \end{center}
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía. \normalfont{Tiempos y distancia (300)}}
+% \begin{table}[htbp]
+% 	\begin{center}
+% 		\begin{tabular}{|l|l|l|}
+% 			\hline
+% 			TAMAÑO & DISTANCIA & TIEMPOS \\
+% 			\hline \hline
+% 			100&1278.99&935 \\ \hline
+% 			115&1462.46& 300 \\ \hline
+% 			130&1781.19&410 \\ \hline
+% 			145&1907.6&479 \\ \hline
+% 			160&2474.64&586 \\ \hline
+% 			175&2787.39&643 \\ \hline
+% 			190&3249.56&766 \\ \hline
+% 			205&3507.7&876 \\ \hline
+% 			220&3973.02&1265 \\ \hline
+% 			235&3983.08&1178 \\ \hline
+% 			250& 4596.83&1183\\ \hline
+% 			265&5095.48& 1288\\ \hline
+% 			280&5373.6&1388 \\ \hline
+% 			295&6362.87&1541 \\ \hline
+% 		\end{tabular}
+% 		\caption{Tabla de tiempos y distancia}
+% 		\label{Tabla de tiempos y distancia}
+% 	\end{center}
+% \end{table}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía. Gráfica distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/snfDistancia.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en cercanía. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/snfTiempo.png}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en inserción}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Calcula el camino parcialmente optimo por un algoritmo de insercion
+% * @param points, el conjunto de puntos sobre el que vamos a trabajar
+% * @return el camino descrito anteriormente
+% * */
+% vector<common::Point> get_best_solution(vector<common::Point> points){
+% vector<common::Point> candidates = points;  // Vector con los candidatos
+% vector<common::Point> road;                  // Vector con la solucion parcial
+% 
+% // Tomo los tres puntos extremos del plano y los coloco como solucion parcial inicial
+% int most_north = get_most_north(candidates);
+% int most_east = get_most_east(candidates);
+% int most_west = get_most_west(candidates);
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en inserción}
+% \begin{lstlisting}[language=C]
+% road.push_back(candidates[most_north]);
+% road.push_back(candidates[most_west]);
+% road.push_back(candidates[most_east]);
+% 
+% candidates.erase(candidates.begin() + most_north);
+% candidates.erase(candidates.begin() + most_west);
+% candidates.erase(candidates.begin() + most_east);
+% 
+% // Construyo las soluciones parciales
+% while(candidates.size() > 0){
+% 	// Tomo el mejor candidato para la siguiente iteracion
+% 	vector<int> best_candidate_and_pos = get_best_candidate(road, candidates);
+% 	int best_candidate = best_candidate_and_pos[0];
+% 	int best_pos = best_candidate_and_pos[1];
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en inserción}
+% \begin{lstlisting}[language=C]
+% 	// Hago el traspase de candidatos a solucion parcial
+% 	road.insert(road.begin() + best_pos,candidates[best_candidate]);
+% 	candidates.erase(candidates.begin() + best_candidate);
+% }
+% 
+% return road;
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en inserción \normalfont{Explicación}}
+% \begin{center}
+% 	\textbf{\large{PASOS:}}
+% 	\begin{enumerate}
+% 		\item Partimos de tres nodos: 
+% 		\begin{itemize}
+% 			\item El que está más al \textit{Norte}.
+% 			\item El que está más al \textit{Este}. 
+% 			\item El que está más al \textit{Oeste}.
+% 		\end{itemize}
+% 		\item Partiendo de este camino añadimos el punto de forma que la distancia del nuevo camino sea mínima.
+% 		\item Repetimos esto sucesivamente hasta que tengamos todos los puntos.
+% 		\item Finalmente devuelve el camino.
+% 	\end{enumerate}
+% \end{center}
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{TSP basado en inserción. \normalfont{Tiempos y distancia (300)}}
+% \begin{table}[htbp]
+% \begin{center}
+% 	\begin{tabular}{|l|l|l|}
+% 		\hline
+% 		TAMAÑO & DISTANCIA & TIEMPOS \\
+% 		\hline \hline
+% 		100&1138&577206 \\ \hline
+% 		115&1364.62&1014658 \\ \hline
+% 		130&1618.9&1523364 \\ \hline
+% 		145&1893.79&2311261 \\ \hline
+% 		160&2184.95&3325929 \\ \hline
+% 		175&2555.25&4614364 \\ \hline
+% 		190&2924.26&6693015 \\ \hline
+% 		205&3183.27&8416194 \\ \hline
+% 		220&3559.8&10847461 \\ \hline
+% 		235&4108.07&14116260 \\ \hline
+% 		250&4459.9&17317916 \\ \hline
+% 		265&4645.52&22675340 \\ \hline
+% 		280&5025.57&27542775 \\ \hline
+% 		295&5353.33&33257464 \\ \hline
+% 	\end{tabular}
+% 	\caption{Tabla de tiempos y distancia}
+% 	\label{Tabla de tiempos y distancia}
+% \end{center}
+% \end{table}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en inserción. Gráfica distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/insertionDistancia.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP basado en inserción. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/insertionTiempo.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones}
+% \begin{lstlisting}[language=C]
+% vector<common::Point> get_best_solution(vector<common::Point> points, int perturbations){
+% // Tomo la solucion dada por el snf
+% vector<common::Point> base_road = get_snf_solution(points);
+% 
+% // Perturbo el numero de veces indicada
+% for(int i = 0; i < perturbations; i++){
+% // Calculo la posicion respecto a la que perturbar
+% int pos = get_worst_node(points);
+% 
+% // Perturbo el camino base
+% perturbate(base_road, pos);
+% }
+% 
+% return base_road;
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones}
+% \begin{lstlisting}[language=C]
+% void perturbate(vector<common::Point> road, int pos){
+% vector<common::Point> current_perb = road;
+% double best_gain = 0;
+% int best_perturbation = pos;
+% double base_distance = common::get_road_distance(road);
+% 
+% // Calculo la distancia de todas las permutaciones
+% for(int i = 0; i < road.size(); i++){	
+% // Calculo la ganancia de esta permutacion
+% current_perb = common::get_swap(road, pos, i);
+% double swap_distance = common::get_road_distance(current_perb);
+% double current_gain = swap_distance - base_distance;
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones}
+% \begin{lstlisting}[language=C]
+% // Compruebo si he mejorado la ganancia
+% if(current_gain > best_gain){
+% best_perturbation = i;
+% best_gain = current_gain;
+% }
+% }
+% 
+% // Hago el cambio con la mejor perturbacion
+% road = common::get_swap(road, pos, best_perturbation);
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones \normalfont{Explicación}}
+% \begin{center}
+% \textbf{\large{PASOS:}}
+% \begin{enumerate}
+% 	\item Calculamos la solución dada por el algoritmo SNF.
+% 	\item Calculamos el nodo respecto el que tenemos que perturbar.
+% 	\item Perturbamos y vemos la ganancia del camino.
+% 	\item Si la ganancia es mejor se cambia el camino.
+% 	\item Se devuelve el camino.
+% \end{enumerate}
+% \end{center}
+% 
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones. Gráfica distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/perturbationDistancia.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/perturbationTiempo.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación SNF e inserción distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/distancia2.png}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Comparación SNF e inserción tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/tiempo2.png}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Comparación SNF y perturbación distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/DistanciaC-P.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación SNF y perturbación tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/TiempoC-P.png}
+% \end{frame}
+% 
+% 
+% 
+% \begin{frame}[fragile]{TSP fuerza bruta}\normalfont{Explicación}
+% \begin{center}
+% 	\textbf{\large{PASOS:}}
+% \end{center}
+% \begin{enumerate}
+% 	\item Calculamos todos los posibles caminos y sus distancias.
+% 	\item Elegimos el camino con menor distancia.
+% \end{enumerate}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación SNF, inserción y fuerza bruta distancia}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/distancia3.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación SNF, inserción y fuerza bruta tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficastsp/tiempo3.png}
+% \end{frame}
+% 
+% 
+% 
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (fuerza bruta)}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Genera todas las permutaciones del conjunto {0, 1, ..., n-1}
+% * @param n, el maximo del conjunto sobre el que se permuta
+% * @return un array con todas las permutaciones anteriormente descritas
+% * */
+% vector<vector<int> > generate_permutations(int n);
+% 
+% /**
+% * @brief Calcula la asignacion optima dada una matriz de costes, usando fuerza bruta
+% * @param matrix, la matriz que almacena los costes
+% * @return la asignacion optima
+% * */
+% vector<int> get_best_solution(vector<vector<double> > matrix){
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (fuerza bruta)}
+% \begin{lstlisting}[language=C]
+% // Tomo el array de permutaciones, del que me tengo que quedar con solo una 
+% // permutacion, la permutacion de la asignacion optima
+% vector<vector<int> > permutations = generate_permutations(matrix.size());
+% 
+% // Valores base para empezar a realizar comparaciones
+% int best_permutation = 0;
+% double best_cost = common::get_cost(matrix, permutations[0]);
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (fuerza bruta)}
+% \begin{lstlisting}[language=C]
+% // Comparo todas las permutaciones
+% for(int i = 0; i < permutations.size(); i++){
+% 	double current_cost = common::get_cost(matrix, permutations[i]);
+% 
+% 	if(current_cost < best_cost){
+% 		best_cost = current_cost;
+% 		best_permutation = i;
+% 	}
+% }
+% 
+% return permutations[best_permutation];
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (fuerza bruta) \normalfont{Explicación}}
+% \begin{center}
+% 	\textbf{\large{PASOS:}}
+% 	\begin{enumerate}
+% 		\item Calculamos todas las permutaciones posibles de asignaciones trabajadores-tareas.
+% 		\item Calculamos el coste de dichas permutaciones.
+% 		\item Vemos cual es el menor coste.
+% 		\item Devolvemos esa asignación.
+% 	\end{enumerate}
+% \end{center}
+% 
+% 
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Calcula la asignacion parcialmente optima dada una matriz de costes, usando un algoritmo greedy
+% * @param matrix, la matriz que almacena los costes
+% * @return la asignacion parcialmente optima
+% * */
+% vector<int> get_best_solution(vector<vector<double> > matrix){
+% // Vector que almacena las tareas que todavia no han sido asignadas
+% vector<bool> available_tasks(matrix.size(), true);
+% 
+% // Vector con la solucion parcial
+% vector<int> asignation;
+% 
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas}
+% \begin{lstlisting}[language=C]
+% // Asigno a cada trabajador la tarea con menor coste que quede disponible
+% for(int i = 0; i < matrix.size(); i++){
+% 	// Busco la mejor tarea que quede disponible
+% 	int current_task = find_best_task(matrix[i], available_tasks);
+% 
+% 	// Aniado la tarea a la asignacion
+% 	asignation.push_back(current_task);
+% 
+% 	// Esa tarea ya no esta disponible
+% 	available_tasks[current_task] = false;
+% }
+% 
+% return asignation;
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Halla dado un vector de costo de tareas, la mejor tarea que se encuentra disponible
+% * @param tasks_cost, vector con los costos de las tareas
+% * @param available, vector para controlar si las tareas se encuentra o no disponibles
+% * */
+% int find_best_task(vector<double>tasks_cost, vector<bool> available){
+% // Encuentro la primera tarea disponible para comenzar las comparaciones
+% int best_task = 0;
+% while(available[best_task] == false){
+% 	best_task++;
+% }
+% double best_cost = tasks_cost[best_task];
+% 
+% \end{lstlisting}
+% \end{frame}
+% \begin{frame}[fragile]{Trabajadores y Tareas}
+% \begin{lstlisting}[language=C]
+% 
+% // Comparo todos los costes que quedan disponibles
+% for(int i = best_task; i < tasks_cost.size(); i++){
+% 	if(available[i] == true){ // La tarea sigue disponible
+% 		if(tasks_cost[i] < best_cost){
+% 			best_cost = tasks_cost[i];
+% 			best_task = i;
+% 		}
+% 	}
+% }
+% 
+% return best_task;
+% }
+% \end{lstlisting}
+% \end{frame}
+% \begin{frame}[fragile]{Trabajadores y Tareas. \normalfont{Explicación}}
+% \begin{center}
+% 	\textbf{\large{PASOS}}
+% 	\begin{enumerate}
+% 		\item Elegimos la tarea con menor coste del primer trabajador y se la asignamos.
+% 		\item Eliminamos dicha tarea de las tareas disponibles.
+% 		\item Asignamos al siguiente trabajador la tarea con menor coste de entre las disponibles.
+% 		\item Repetimos estos pasos hasta que no queden tareas.
+% 		\item Devolvemos la asignación.
+% 
+% 	\end{enumerate}
+% \end{center}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones. Gráfica coste}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/coste_easy.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{TSP perturbaciones. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/tiempo_easy.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (perturbaciones)}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Calcula la asignacion parcialmente optima dada una matriz de costes, usando un algoritmo greedy
+% * @param matrix, la matriz que almacena los costes
+% * @param num_permutations, el numero de perturbaciones que se van a realizar para mejorar la matriz
+% * @return la asignacion parcialmente optima
+% * */
+% vector<int> get_best_solution(vector<vector<double> > matrix, int num_permutations){
+% // Asignacion base sobre la que vamos a ir haciendo perturbaciones
+% vector<int> base_asignation = get_random_asignation(matrix.size());
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (perturbaciones)}
+% \begin{lstlisting}[language=C]
+% // Hacemos el numero de perturbaciones dado
+% for(int i = 0; i < num_permutations; i++){
+% 	// Busco cual es el trabajador con mayor coste
+% 	int worst_worker = find_worst_worker(matrix, base_asignation);
+% 
+% 	// Busco cual es la mejor permutacion
+% 	int best_permutation = find_best_permutation(matrix, base_asignation, worst_worker);
+% 
+% 	// Hago el cambio si hay un cambio a mejor
+% 	perturbate(base_asignation, worst_worker, best_permutation);
+% }
+% 
+% return base_asignation;
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (perturbaciones)}
+% \begin{lstlisting}[language=C]
+% /**
+% * @brief Encuentra cual es la mejor permutacion para mejorar el coste de una asignacion
+% * @param matrix, la matriz con los costes asociados
+% * @param base_asignation, asignacion base que tenemos que mejorar
+% * @param worst_worker, trabajador con pero coste, el cual se tiene que intercambiar con otro
+% * @return el indice del trabajador con el que se tiene que intercambiar el peor trabajador
+% * */
+% int find_best_permutation(vector<vector<double> > matrix, vector<int> base_asignation, int worst_worker){
+% // Coste base y coste de cada iteracion
+% double base_cost = common::get_cost(matrix, base_asignation);         
+% 
+% 
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (perturbaciones)}
+% \begin{lstlisting}[language=C]
+% // Genero una perturbacion aleatoria
+% int best_permutation = common::random_int(0, base_asignation.size() -1);
+% vector<int> current_perturbation = base_asignation;
+% perturbate(current_perturbation, worst_worker, best_permutation);
+% 
+% // Calculo la ganancia de la perturbacion aleatoria
+% double current_cost = common::get_cost(matrix, current_perturbation);
+% double best_gain = base_cost - current_cost;
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas (perturbaciones)}
+% \begin{lstlisting}[language=C]
+% // Busco la mejor perturbacion
+% for(int i = 0; i < base_asignation.size(); i++){
+% 	// Tomo la perturbacion actual
+% 	current_perturbation = base_asignation;
+% 	perturbate(current_perturbation, worst_worker, i);
+% 	
+% 	// Calculo el nuevo coste de la perturbacion y la ganancia
+% 	current_cost = common::get_cost(matrix, current_perturbation);
+% 	double current_gain = base_cost - current_cost;
+% 
+% 	// Hago la comparativa
+% 	if(current_gain < best_gain){
+% 		best_gain = current_gain;
+% 		best_permutation = i;
+% 	}
+% }
+% return best_permutation;
+% }
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Trabajadores y Tareas(perturbaciones). \normalfont{Explicación}}
+% \begin{center}
+% 	\textbf{\large{PASOS}}
+% 	\begin{enumerate}
+% 		\item Elegimos la asignación obtenida por el algoritmo anterior
+% 		\item Luego buscamos la mejor perturbación a partir del nodo con peor coste.
+% 		\item Si encontramos una perturbación con una ganancia mayor la cambiamos por la asignación que teníamos.
+% 		\item Devolvemos la asignación.
+% 		
+% 	\end{enumerate}
+% \end{center}
+% 
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación perturbación y easy. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/tiempos2.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación perturbación y easy. Gráfica coste}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/coste2.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación perturbación, easy y fuerza bruta. Gráfica tiempo}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/tiempos3.png}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Comparación perturbación, easy y fuerza bruta. Gráfica coste}
+% \includegraphics[width=\textwidth]{../Graficas/graficasWorker/coste3.png}
+% \end{frame}
+% 
+% \section{Conclusión}
+% 
+% \begin{frame}{Conclusión}
+% A pesar de no encontrar siempre la solución óptima, los algoritmos greedy nos llevan hacia una solución aproximada, que nos puede ser más útil en algunos casos.
+% \end{frame}
+% 
+% 
+% 
+% \end{document}
