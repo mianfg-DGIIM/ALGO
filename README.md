@@ -1,5 +1,7 @@
 [⬅ Más asignaturas del DGIIM](https://github.com/mianfg/DGIIM)
 
+![Repo image](https://repository-images.githubusercontent.com/263383438/5ce44f00-eae8-11ea-9f31-7b89c8b0148c)
+
 # `ALGO` Algorítmica
 
 | Nombre                | Ingeniería de Servidores                                     |
