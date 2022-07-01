@@ -1,6 +1,6 @@
-[⬅ Más asignaturas del DGIIM](https://github.com/mianfg/DGIIM)
+[⬅ Más asignaturas del DGIIM](https://github.com/mianfg-DGIIM)
 
-![Repo image](https://repository-images.githubusercontent.com/263383438/5ce44f00-eae8-11ea-9f31-7b89c8b0148c)
+![Repo image](https://repository-images.githubusercontent.com/263383438/2535ee8f-e546-4d70-a307-58e473b06864)
 
 # `ALGO` Algorítmica
 
